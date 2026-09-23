@@ -8,6 +8,8 @@ const totalCountriesElement = document.getElementById("totalCountries");
 const countriesAbove5MElement = document.getElementById("countriesAbove5M");
 const countriesBelow5MElement = document.getElementById("countriesBelow5M");
 const favoriteCountElement = document.getElementById("favoriteCount");
+const favoritesOnly = document.getElementById("favoritesOnly");
+const countriesPerPageSelect = document.getElementById("countriesPerPage");
 
 const countryModal = document.getElementById("countryModal");
 const closeModal = document.getElementById("closeModal");
@@ -47,10 +49,10 @@ let populationFilter = {
     max: null
 };
 
-const countriesPerPage = 5;
+let countriesPerPage = 5;
 let currentPage = 1;
 
-const API_KEY = "rc_live_696f2939008b4f2fa0feac6a071f04af";
+const API_KEY = "";
 
 const API_URL = "https://api.restcountries.com/countries/v5";
 
@@ -111,7 +113,6 @@ resetFilterBtn.addEventListener(
     resetPopulationFilter
 );
 
-
 searchInput.addEventListener("keydown", function (event) {
 
     if (event.key === "Enter") {
@@ -152,6 +153,18 @@ nextPageBtn.addEventListener("click", function () {
 
         renderTable();
     }
+});
+
+favoritesOnly.addEventListener("change", function () {
+    currentPage = 1;
+    renderTable();
+});
+
+countriesPerPageSelect.addEventListener("change", function () {
+    countriesPerPage = Number(countriesPerPageSelect.value);
+
+    currentPage = 1;
+    renderTable();
 });
 
 
@@ -479,8 +492,23 @@ function renderTable() {
             return false;
         }
 
+        if (favoritesOnly.checked) {
+            const countryId = getCountryId(country);
+
+            if (!favoriteCountries.has(countryId)) {
+                return false;
+            }
+        }
+
         return true;
     });
+
+    if (filteredCountries.length === 0) {
+        tableBody.innerHTML = "";
+        emptyMessage.style.display = "block";
+        pagination.style.display = "none";
+        return;
+    }
 
     const totalPages = Math.ceil(filteredCountries.length / countriesPerPage);
 
@@ -606,17 +634,11 @@ function renderTable() {
         }
     );
 
-    pageInfo.textContent =
-        `Page ${currentPage} of ${totalPages}`;
+    pageInfo.textContent = `${currentPage} of ${totalPages}`;
 
+    previousPageBtn.disabled = currentPage === 1;
 
-    previousPageBtn.disabled =
-        currentPage === 1;
-
-
-    nextPageBtn.disabled =
-        currentPage === totalPages;
-
+    nextPageBtn.disabled = currentPage === totalPages;
 
     if (totalPages <= 1) {
         pagination.style.display = "none";

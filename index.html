@@ -72,6 +72,23 @@
             </div>
 
             <p id="populationFilterMessage" class="population-filter-message"></p>
+            
+            <div class="table-controls">
+                <label class="favorites-filter">
+                    <input type="checkbox" id="favoritesOnly">
+                    <span>Show Favorites Only</span>
+                </label>
+
+                <div class="countries-per-page">
+                    <label for="countriesPerPage">Countries Per Page</label>
+                    <select id="countriesPerPage">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
 
             <section class="table-section">
                 <h2>Selected Countries</h2>
