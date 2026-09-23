@@ -51,80 +51,96 @@
 
             <div id="searchResults" class="search-results"></div>
             
-            <div class="population-filter">
-                <div class="population-input">
-                    <label for="minPopulation">Minimum population</label>
-                    <input type="number" id="minPopulation" placeholder="1000000">
+            <div class="filter-controls-box">
+                <div class="population-filter">
+                    <div class="population-input">
+                        <label for="minPopulation">Minimum population</label>
+                        <input type="number" id="minPopulation" placeholder="1000000">
+                    </div>
+
+                    <div class="population-input">
+                        <label for="maxPopulation">Maximum population</label>
+                        <input type="number" id="maxPopulation" placeholder="10000000">
+                    </div>
+
+                    <button id="applyFilterBtn" class="apply-filter-btn">
+                        Apply Filter
+                    </button>
+
+                    <button id="resetFilterBtn" class="reset-filter-btn">
+                        Reset
+                    </button>
                 </div>
 
-                <div class="population-input">
-                    <label for="maxPopulation">Maximum population</label>
-                    <input type="number" id="maxPopulation" placeholder="10000000">
-                </div>
+                <p id="populationFilterMessage" class="population-filter-message"></p>
 
-                <button id="applyFilterBtn" class="apply-filter-btn">
-                    Apply Filter
-                </button>
+                <div class="table-controls">
+                    <label class="favorites-filter">
+                        <input type="checkbox" id="favoritesOnly">
+                        <span>Show Favorites Only</span>
+                    </label>
 
-                <button id="resetFilterBtn" class="reset-filter-btn">
-                    Reset
-                </button>
-            </div>
+                    <div class="countries-per-page">
+                        <label for="countriesPerPage">Countries per page:</label>
+                        <select id="countriesPerPage">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
 
-            <p id="populationFilterMessage" class="population-filter-message"></p>
-            
-            <div class="table-controls">
-                <label class="favorites-filter">
-                    <input type="checkbox" id="favoritesOnly">
-                    <span>Show Favorites Only</span>
-                </label>
-
-                <div class="countries-per-page">
-                    <label for="countriesPerPage">Countries Per Page</label>
-                    <select id="countriesPerPage">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                    </select>
+                    <button id="randomCountryBtn" class="random-country-btn">
+                        🎲 Random Country
+                    </button>
                 </div>
             </div>
 
             <section class="table-section">
                 <h2>Selected Countries</h2>
 
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Flag</th>
-
-                                <th>
-                                    <button class="sort-btn" data-sort="name">
-                                        Name
-                                        <span id="nameArrow"></span>
-                                    </button>
-                                </th>
-
-                                <th>
-                                    <button class="sort-btn" data-sort="population">
-                                        Population
-                                        <span id="populationArrow"></span>
-                                    </button>
-                                </th>
-                                <th>Favorite</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="countryTableBody">
-                            <!-- Countries here -->
-                        </tbody>
-                    </table>
+                <div id="tableStatus" class="table-status">
+                    <p id="tableStatusMessage"></p>
+                    <button id="tryAgainBtn" class="try-again-btn">
+                        Try Again
+                    </button>
                 </div>
 
-                <p id="emptyMessage" class="empty-message">
-                    No countries selected yet.
-                </p>
+                <div id="tableContent">
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Flag</th>
+
+                                    <th>
+                                        <button class="sort-btn" data-sort="name">
+                                            Name
+                                            <span id="nameArrow"></span>
+                                        </button>
+                                    </th>
+
+                                    <th>
+                                        <button class="sort-btn" data-sort="population">
+                                            Population
+                                            <span id="populationArrow"></span>
+                                        </button>
+                                    </th>
+                                    <th>Favorite</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="countryTableBody">
+                                <!-- Countries here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p id="emptyMessage" class="empty-message">
+                        No countries selected yet.
+                    </p>
+                </div>
             </section>
 
         </main>

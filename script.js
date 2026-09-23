@@ -26,9 +26,15 @@ const maxPopulationInput = document.getElementById("maxPopulation");
 const applyFilterBtn = document.getElementById("applyFilterBtn");
 const resetFilterBtn = document.getElementById("resetFilterBtn");
 const populationFilterMessage = document.getElementById("populationFilterMessage");
+const randomCountryBtn = document.getElementById("randomCountryBtn");
 
 const nameArrow = document.getElementById("nameArrow");
 const populationArrow = document.getElementById("populationArrow");
+
+const tableStatus = document.getElementById("tableStatus");
+const tableStatusMessage = document.getElementById("tableStatusMessage");
+const tryAgainBtn = document.getElementById("tryAgainBtn");
+const tableContent = document.getElementById("tableContent");
 
 
 let selectedCountries = [];
@@ -160,6 +166,20 @@ favoritesOnly.addEventListener("change", function () {
     renderTable();
 });
 
+randomCountryBtn.addEventListener("click", function () {
+    if (selectedCountries.length === 0) {
+        return;
+    }
+
+    const randomIndex =
+        Math.floor(Math.random() * selectedCountries.length);
+
+    const randomCountry =
+        selectedCountries[randomIndex];
+
+    openCountryModal(randomCountry);
+});
+
 countriesPerPageSelect.addEventListener("change", function () {
     countriesPerPage = Number(countriesPerPageSelect.value);
 
@@ -167,6 +187,9 @@ countriesPerPageSelect.addEventListener("change", function () {
     renderTable();
 });
 
+tryAgainBtn.addEventListener("click", function () {
+    searchCountries();
+});
 
 function getCountryId(country) {
     return (
@@ -279,6 +302,7 @@ async function searchCountries() {
 
 
     try {
+        showTableLoading();
 
         searchBtn.disabled = true;
         searchBtn.textContent = "Searching...";
@@ -315,15 +339,13 @@ async function searchCountries() {
         }
 
 
+        hideTableStatus();
         displaySearchResults(countries);
 
 
     } catch (error) {
 
-        console.error(
-            "Country API error:",
-            error
-        );
+        showTableError();
 
         message.textContent = "Unable to find countries. Please try again.";
 
@@ -887,6 +909,28 @@ function resetPopulationFilter() {
     renderTable();
 }
 
+function showTableLoading() {
+    tableContent.style.display = "none";
+    tableStatus.style.display = "flex";
+
+    tableStatusMessage.textContent = "Loading countries...";
+
+    tryAgainBtn.style.display = "none";
+}
+
+function showTableError() {
+    tableContent.style.display = "none";
+    tableStatus.style.display = "flex";
+
+    tableStatusMessage.textContent = "Unable to load countries. Please check your internet connection and try again.";
+
+    tryAgainBtn.style.display = "block";
+}
+
+function hideTableStatus() {
+    tableStatus.style.display = "none";
+    tableContent.style.display = "block";
+}
 
 pagination.style.display = "none";
 
