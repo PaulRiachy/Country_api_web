@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Countries Stats</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Countries Stats</h1>
+            <p>Search for a country and add it to the table.</p>
+        </header>
+
+        <main>
+
+            <div class="statistics">
+                <div class="stat-card">
+                    <span>Total Countries: </span>
+                    <strong id="totalCountries">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Countries >= 5M: </span>
+                    <strong id="countriesAbove5M">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Countries < 5M: </span>
+                    <strong id="countriesBelow5M">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Favorites: </span>
+                    <strong id="favoriteCount">0</strong>
+                </div>
+            </div>
+
+            <div class="search-section">
+                <input type="text" id="searchInput" placeholder="Search for a country...">
+
+                <button id="searchBtn">Search</button>
+            </div>
+
+            <div id="message"></div>
+
+            <div id="searchResults" class="search-results"></div>
+            
+            <div class="population-filter">
+                <div class="population-input">
+                    <label for="minPopulation">Minimum population</label>
+                    <input type="number" id="minPopulation" placeholder="1000000">
+                </div>
+
+                <div class="population-input">
+                    <label for="maxPopulation">Maximum population</label>
+                    <input type="number" id="maxPopulation" placeholder="10000000">
+                </div>
+
+                <button id="applyFilterBtn" class="apply-filter-btn">
+                    Apply Filter
+                </button>
+
+                <button id="resetFilterBtn" class="reset-filter-btn">
+                    Reset
+                </button>
+            </div>
+
+            <p id="populationFilterMessage" class="population-filter-message"></p>
+
+            <section class="table-section">
+                <h2>Selected Countries</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Flag</th>
+
+                                <th>
+                                    <button class="sort-btn" data-sort="name">
+                                        Name
+                                        <span id="nameArrow"></span>
+                                    </button>
+                                </th>
+
+                                <th>
+                                    <button class="sort-btn" data-sort="population">
+                                        Population
+                                        <span id="populationArrow"></span>
+                                    </button>
+                                </th>
+                                <th>Favorite</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="countryTableBody">
+                            <!-- Countries here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <p id="emptyMessage" class="empty-message">
+                    No countries selected yet.
+                </p>
+            </section>
+
+        </main>
+
+    </div>
+
+    <div id="countryModal" class="modal">
+        <div class="modal-card">
+            <h2>Country Details</h2>
+
+            <img id="modalFlag" class="modal-flag" alt="Country flag">
+
+            <div class="modal-details">
+                <p><strong>Name:</strong> <span id="modalName"></span></p>
+                <p><strong>Capital:</strong> <span id="modalCapital"></span></p>
+                <p><strong>Population:</strong> <span id="modalPopulation"></span></p>
+                <p><strong>Region:</strong> <span id="modalRegion"></span></p>
+                <p><strong>Subregion:</strong> <span id="modalSubregion"></span></p>
+                <p><strong>Languages:</strong> <span id="modalLanguages"></span></p>
+            </div>
+
+            <button id="closeModal" class="modal-close">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
